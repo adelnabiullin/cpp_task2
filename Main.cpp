@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include "lrucache.hpp"
 
 using namespace std;
 using std::vector;
@@ -41,20 +42,34 @@ int main() {
         cout << *it << ' ';
     cout << endl;
 
+    // 4. test LRUcache
+    lru_cache<int, int> cache1(10);
+    cache1.put(1, 2);
+    cache1.put(2, 4);
+    cache1.put(3, 6);
+    cache1.put(2, 7);
+    cache1.put(4, 2);
+    cache1.get(3);
+    try {
+        cache1.get(5);
+    } catch (exception& e) {
+        cout << e.what() << endl;
+    }
+    cache1.put(5, 0);
     return 0;
 }
 
 int find(const vector<string> &a_vector, const string &target) {
     int i = 0;
     for (vector<string>::const_iterator it = a_vector.begin(); it < a_vector.end(); it++, i++)
-        if ((*it).compare(target) == 0)
+        if (it->compare(target) == 0)
             return i;
     return a_vector.size();
 }
 
 void replace(vector<string> &a_vector, const string &old_item, const string &new_item) {
     for (vector<string>::iterator it = a_vector.begin(); it < a_vector.end(); it++)
-        if ((*it).compare(old_item) == 0)
+        if (it->compare(old_item) == 0)
             *it = new_item;
 }
 
