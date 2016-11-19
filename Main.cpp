@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "lrucache.hpp"
+#include "sparsematrix.hpp"
 
 using namespace std;
 using std::vector;
@@ -56,6 +57,13 @@ int main() {
         cout << e.what() << endl;
     }
     cache1.put(5, 0);
+
+    // 5. test sparse matrix
+    sparse_matrix matrix1;
+    matrix1.put(0, 0, 2.2);
+    matrix1.put(0, 2, 7);
+    matrix1.put(2, 1, 2.3);
+
     return 0;
 }
 
