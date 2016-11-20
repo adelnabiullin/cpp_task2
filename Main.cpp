@@ -44,6 +44,7 @@ int main() {
     cout << endl;
 
     // 4. test LRUcache
+    cout << "\nTask 4:";
     lru_cache<int, int> cache1(10);
     cache1.put(1, 2);
     cache1.put(2, 4);
@@ -59,10 +60,12 @@ int main() {
     cache1.put(5, 0);
 
     // 5. test sparse matrix
+    cout << "\nTask 5:\n";
     sparse_matrix matrix1;
     matrix1.put(0, 0, 2.2);
     matrix1.put(0, 2, 7);
     matrix1.put(2, 1, 2.3);
+    cout << matrix1;
 
     return 0;
 }

@@ -8,10 +8,8 @@
 using namespace std;
 
 class sparse_matrix {
-    map<pair<int, int>, double> m;
-    int dimension;
-
 public:
+    typedef map<pair<int, int>, double> arr_map;
 
     sparse_matrix() : dimension(3) {}
     sparse_matrix(int dim) : dimension(dim) {}
@@ -24,15 +22,31 @@ public:
         m[make_pair(row, column)] = value;
     }
 
-    double get(const int &row, const int &column) {
+    double get(const int &row, const int &column) const {
         if (row < 0 || row >= dimension || column < 0 || column >= dimension) {
             throw range_error("\nWrong row or column\n");
         }
-        return m.find(make_pair(row, column));
+        arr_map::const_iterator it;
+        it = m.find(make_pair(row, column));
+        if (it != m.end()) {
+            return it->second;
+        }
+        return 0;
     }
 
-    // TODO: finish cout printing
-    // void operator<< ()
+    friend ostream& operator<<(ostream &os, const sparse_matrix &sm) {
+        for (int i = 0; i < sm.dimension; ++i) {
+            for (int j = 0; j < sm.dimension; ++j) {
+                os << sm.get(i, j) << ' ';
+            }
+            os << endl;
+        }
+        return os;
+    }
+
+private:
+    arr_map m;
+    int dimension;
 };
 
 #endif
